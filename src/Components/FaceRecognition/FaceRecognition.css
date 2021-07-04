@@ -7,3 +7,9 @@
 	cursor: pointer;
 
 }
+
+/*With absolute positioning, an element can be placed anywhere on a page.
+left:  placed #px from the left of the page
+right:  placed #px from the right of the page
+top:  placed #px from the top of the page
+bottom:  placed #px from the bottom of the page*/

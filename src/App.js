@@ -51,10 +51,10 @@ class App extends Component {
     console.log(width, height)
 
     return{
-      leftCol: faceBox.left_col * width,
+      leftCol: faceBox.left_col * width ,
       topRow: faceBox.top_row * height,
-      rightCol: width - (faceBox.right_col * width),
-      bottomRow: height - (faceBox.bottom_row * height)
+      rightCol: width - (faceBox.right_col*width) ,
+      bottomRow: height -(faceBox.bottom_row * height)
     }
 
 
@@ -81,8 +81,9 @@ class App extends Component {
     // this.state.imageUrl cannot be used here cause it's going to give error
     .then(
       response =>{
+        console.log(response)
         this.displayFaceBox(this.calculateFaceLocation(response))
-      //  console.log(response.outputs[0].data.regions[0].region_info.bounding_box);
+        console.log(response.outputs[0].data.regions[0].region_info.bounding_box);
         // outputs the region where face is detected
     
       },
