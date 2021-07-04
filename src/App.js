@@ -8,7 +8,8 @@ import Rank from './Components/Rank/Rank';
 import Particles from 'react-particles-js';
 import Clarifai from 'clarifai';
 import FaceRecognition from './Components/FaceRecognition/FaceRecognition';
-
+import SignIn from'./Components/SignIn/SignIn';
+import Register from'./Components/Register/Register';
 
 // defining parameters for moving particles on the background
 const particlesOptions = {
@@ -39,6 +40,8 @@ class App extends Component {
       input: '',
       imageUrl : '',
       box: {},
+      route:'signin',
+      signedIn: false,
     }
   }
   // locating the face-dimensions and creating a box around it
@@ -91,18 +94,41 @@ class App extends Component {
     .catch(err => console.log(err) );
   }
 
+  onRouteChange = (route) =>{
+    if(route === 'signout'){
+      this.setState({signedIn: false})
+
+    }
+    else if(route === 'home'){
+      this.setState({signedIn: true})
+
+    }
+    this.setState({route: route});
+  }
+
   render(){
     return (
       <div className="App">
          <Particles className = 'particles'
                   params={particlesOptions} />
-        <Navigation />
-        <Logo />
+        <Navigation signedIn={this.state.signedIn} onRouteChange = {this.onRouteChange}/>
+        {
+          this.state.route === 'home'
+          ?<div>
+            <Logo />
+            
 
-        <Rank/>
-        <ImageLinkForm onInputChange = {this.onInputChange} onButtonSubmit = {this.onSubmit}/>
-        
-         <FaceRecognition imageUrl = {this.state.imageUrl} box = {this.state.box} /> 
+            <Rank/>
+            <ImageLinkForm onInputChange = {this.onInputChange} onButtonSubmit = {this.onSubmit}/>
+            
+             <FaceRecognition imageUrl = {this.state.imageUrl} box = {this.state.box} /> 
+          </div> 
+          :(
+            this.state.route ==='signin'
+            ?<SignIn onRouteChange = {this.onRouteChange}/>
+            :<Register onRouteChange = {this.onRouteChange}/>
+          )
+       }
        
       </div>
     );
