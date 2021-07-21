@@ -15,7 +15,7 @@ import Register from'./Components/Register/Register';
 const particlesOptions = {
     particles: {
       number: {
-        value: 80,
+        value: 60,
         density:{
           enable: true,
           value_area : 800
@@ -23,7 +23,7 @@ const particlesOptions = {
       }
     }
 };
-// defining app to use the functionality of Clarafai
+// defining app to use the functionality of Clarafai: image recognition api
 
 const app = new Clarifai.App({
   apiKey: '5c8047de4a924665b01fa4828211273d'
@@ -44,6 +44,16 @@ class App extends Component {
       signedIn: false,
     }
   }
+// connecting to our backend
+  componentDidMount(){
+    fetch('http://localhost:3000/')
+      .then(response => response.json())
+      .then(console.log)
+      // .then(data =>console.log(data))
+
+  }
+
+
   // locating the face-dimensions and creating a box around it
   calculateFaceLocation = (datas) =>{
 
