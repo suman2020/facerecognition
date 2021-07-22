@@ -44,7 +44,8 @@ class App extends Component {
       signedIn: false,
     }
   }
-// connecting to our backend
+// connecting to our backend for test purpose
+/*
   componentDidMount(){
     fetch('http://localhost:3000/')
       .then(response => response.json())
@@ -52,7 +53,7 @@ class App extends Component {
       // .then(data =>console.log(data))
 
   }
-
+*/
 
   // locating the face-dimensions and creating a box around it
   calculateFaceLocation = (datas) =>{
