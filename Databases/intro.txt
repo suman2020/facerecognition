@@ -1,0 +1,69 @@
+-------------------------------------------DATABASES-------------------------------------------------------
+
+                                       
+
+                                         Backend Developer
+
+                    Node Server                                       Database
+                      -> Node.js                                   -> Relational Databases (Postgres)           		 -> uses SQL to communicate to the backend server
+                      													(
+                      													 - schema has to be predefined
+                      													 - 
+                      													)
+
+                      -> Express.js                               -> Non-relational Databases/NoSQL (MangoDB)             -> MangoDB uses MangoDB query language
+                      													(
+                      														- useful when we have unstructured data
+                      														- not necessary to predefine the schema 
+                      														- characteristics can be defined as demanded
+                      													)		
+
+C:\Program Files\PostgreSQL\13
+Passwords :
+			-> psql -U postgres
+			-> Username: postgres Password: Albina
+			-> Miracle177636$
+
+
+
+Syntax: 
+
+	-> CREATE DATABASE test;
+	-> CREATE TABLE table_name(column1 datatype, columne2 datatype column3 datatype);
+		CREATE TABLE users(name text, age smallint, birthday date)
+
+	-> INSERT INTO table_name(column1, column2, column3) VALUES(value1, value2, value3);
+		INSERT INTO users(name, age, birthday) VALUES('Suman',22, '1999-01-29');
+
+
+	-> SELECT name, age, birthday FROM users;
+
+// alter the table information add or remove column
+	-> ALTER TABLE table_name ADD column datatype;
+
+// update information in the table
+    ->  UPDATE table_name
+    	SET some_column = some_value
+    	WHERE  some_column = some_value;
+
+// conditional statement
+   --> SELECT * from users WHERE name LIKE 'A%';
+
+// sql functions
+
+   -> SELECT AVG(score) FROM users;
+
+   -> SELECT SUM(score) FROM users;
+
+// sql functions COUNT 
+   -> SELECT COUNT(name) FROM users;
+
+// join two tables
+   -> SELECT * from users JOIN login ON users.name = login.name;
+
+// delete a particular row/information
+   -> DELETE FROM users WHERE name = 'Alman';
+
+// delte the  table
+   -> DROP TABLE login;
+   	  DROP TABLE users;

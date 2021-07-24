@@ -108,36 +108,39 @@ class App extends Component {
     }
 
 // on hitting the submit button
-  onSubmit = () =>{
+  onButtonSubmit = () =>{
     this.setState({imageUrl : this.state.input}) // update the image url with whatever the input is 
-    console.log('CLick');
+   // console.log('CLick');
 
     // model to detect face
-    app.models.predict(Clarifai.FACE_DETECT_MODEL,this.state.input)  
+    app.models
+      .predict(Clarifai.FACE_DETECT_MODEL,this.state.input)  
     // this.state.imageUrl cannot be used here cause it's going to give error
-    .then(response =>{
-        // console.log(response)
-        if(response){
-          fetch('http://localhost:3000/image',{
-            method: 'post',
-            headers:{'Content-Type':'application/json'},
-            body: JSON.stringify({
-              id:this.state.user.id
-            })
+      .then(response =>{
+          // console.log(response)
+          if(response){
+            fetch('http://localhost:3000/image',{
+              method: 'put',
+              headers: {'Content-Type':'application/json'},
+              body: JSON.stringify({
+                id: this.state.user.id,
+              
+              
+              })
 
-          })
-            // .then(response =>response.json())
-            // .then(count => {
-            //   this.setState(Object.assign(this.state.user,{entries:count}))
-            // })
+            })
+              .then(response =>response.json())
+              .then(count => {
+                this.setState(Object.assign(this.state.user,{entries:count}))
+              })
+          }
+          this.displayFaceBox(this.calculateFaceLocation(response))
+          //console.log(response.outputs[0].data.regions[0].region_info.bounding_box);
+          // outputs the region where face is detected
+      
         }
-        this.displayFaceBox(this.calculateFaceLocation(response))
-        //console.log(response.outputs[0].data.regions[0].region_info.bounding_box);
-        // outputs the region where face is detected
-    
-      }
-      )
-    .catch(err => console.log(err) );
+        )
+      .catch(err => console.log(err) );
   }
 
   onRouteChange = (route) =>{
@@ -156,7 +159,7 @@ class App extends Component {
     return (
       <div className="App">
          <Particles className = 'particles'
-                  params={particlesOptions} />
+            params={particlesOptions} />
         <Navigation signedIn={this.state.signedIn} onRouteChange = {this.onRouteChange}/>
         {
           this.state.route === 'home'
@@ -165,13 +168,13 @@ class App extends Component {
             
 
             <Rank name = {this.state.user.name} entries = {this.state.user.entries}/>
-            <ImageLinkForm onInputChange = {this.onInputChange} onButtonSubmit = {this.onSubmit}/>
+            <ImageLinkForm onInputChange = {this.onInputChange} onButtonSubmit = {this.onButtonSubmit}/>
             
              <FaceRecognition imageUrl = {this.state.imageUrl} box = {this.state.box} /> 
           </div> 
           :(
             this.state.route ==='signin'
-            ?<SignIn onRouteChange = {this.onRouteChange}/>
+            ?<SignIn loadUser = {this.loadUser} onRouteChange = {this.onRouteChange}/>
             :<Register loadUser = {this.loadUser} onRouteChange = {this.onRouteChange}/>
           )
        }
