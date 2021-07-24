@@ -115,14 +115,27 @@ class App extends Component {
     // model to detect face
     app.models.predict(Clarifai.FACE_DETECT_MODEL,this.state.input)  
     // this.state.imageUrl cannot be used here cause it's going to give error
-    .then(
-      response =>{
-        console.log(response)
+    .then(response =>{
+        // console.log(response)
+        if(response){
+          fetch('http://localhost:3000/image',{
+            method: 'post',
+            headers:{'Content-Type':'application/json'},
+            body: JSON.stringify({
+              id:this.state.user.id
+            })
+
+          })
+            // .then(response =>response.json())
+            // .then(count => {
+            //   this.setState(Object.assign(this.state.user,{entries:count}))
+            // })
+        }
         this.displayFaceBox(this.calculateFaceLocation(response))
-        console.log(response.outputs[0].data.regions[0].region_info.bounding_box);
+        //console.log(response.outputs[0].data.regions[0].region_info.bounding_box);
         // outputs the region where face is detected
     
-      },
+      }
       )
     .catch(err => console.log(err) );
   }
@@ -151,7 +164,7 @@ class App extends Component {
             <Logo />
             
 
-            <Rank/>
+            <Rank name = {this.state.user.name} entries = {this.state.user.entries}/>
             <ImageLinkForm onInputChange = {this.onInputChange} onButtonSubmit = {this.onSubmit}/>
             
              <FaceRecognition imageUrl = {this.state.imageUrl} box = {this.state.box} /> 
