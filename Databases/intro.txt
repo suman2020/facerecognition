@@ -18,6 +18,16 @@
                       														- characteristics can be defined as demanded
                       													)		
 
+
+- creating a database:
+	CREATE DATABASE dbserver;
+	\d dbserver  -> running this database
+	knex.js --> connects with the backend server
+
+
+
+
+
 C:\Program Files\PostgreSQL\13
 Passwords :
 			-> psql -U postgres
@@ -28,7 +38,10 @@ Passwords :
 
 Syntax: 
 
+	(creating a database and navigating it)
+
 	-> CREATE DATABASE test;
+		\c test
 	-> CREATE TABLE table_name(column1 datatype, columne2 datatype column3 datatype);
 		CREATE TABLE users(name text, age smallint, birthday date)
 
