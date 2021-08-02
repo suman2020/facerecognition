@@ -22,7 +22,7 @@ class SignIn extends React.Component {
 	onSubmitSignIn = () =>{
 		// sending information to the backend server
 		///console.log(this.state);
-		fetch('http://localhost:3000/signin', {
+		fetch('https://boiling-taiga-43513.herokuapp.com/signin', {
 			method: 'post',
 			headers:{'Content-Type': 'application/json'},
 			body: JSON.stringify({

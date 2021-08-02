@@ -109,7 +109,7 @@ class App extends Component {
   onButtonSubmit = () =>{
     this.setState({imageUrl : this.state.input}) // update the image url with whatever the input is 
    // console.log('CLick');
-      fetch('http://localhost:3000/imageurl',{
+      fetch('https://boiling-taiga-43513.herokuapp.com/imageurl',{
               method: 'post',
               headers: {'Content-Type':'application/json'},
               body: JSON.stringify({
@@ -124,7 +124,7 @@ class App extends Component {
         .then(response =>{
             // console.log(response)
             if(response){
-              fetch('http://localhost:3000/image',{
+              fetch('https://boiling-taiga-43513.herokuapp.com/image',{
                 method: 'put',
                 headers: {'Content-Type':'application/json'},
                 body: JSON.stringify({

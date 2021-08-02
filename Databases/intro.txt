@@ -23,6 +23,9 @@
 	CREATE DATABASE dbserver;
 	\d dbserver  -> running this database
 	knex.js --> connects with the backend server
+			npm install knex
+			npm install pg
+
 
 
 
